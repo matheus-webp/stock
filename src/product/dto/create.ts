@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { IsNotEmpty, IsNumber, IsString, MinLength } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 @Injectable()
 export class CreateProductDto {
   @IsNotEmpty()
   @IsString()
-  @MinLength(2)
   name: string;
 
   @IsNotEmpty()

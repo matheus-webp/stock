@@ -9,6 +9,6 @@ export class EncryptionService {
   }
 
   async compare(value: string, hashedValue: string) {
-    return await bcrypt.hash(value, hashedValue);
+    return await bcrypt.compare(value, hashedValue);
   }
 }

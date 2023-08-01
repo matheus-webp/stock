@@ -3,10 +3,13 @@ import {
   Controller,
   HttpException,
   HttpStatus,
+  Param,
   Post,
+  Query,
+  Request,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { SignUpDto } from './dto';
+import { SignUpDto, UpdateUserDto } from './dto';
 
 @Controller('user')
 export class UserController {
@@ -27,5 +30,10 @@ export class UserController {
     }
     const { passwordConfirmation: _, ...user } = signUpDto;
     return await this.userService.create(user);
+  }
+
+  async update(@Request() req, @Body() updateUserDto: UpdateUserDto) {
+    const { user } = req;
+    await this.userService.update(user.id, updateUserDto);
   }
 }
