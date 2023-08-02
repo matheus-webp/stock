@@ -5,15 +5,15 @@ import {
   HttpStatus,
   Post,
 } from '@nestjs/common';
-import { AuthorizationService } from './authorization.service';
+import { AuthenticationService } from './authentication.service';
 import { UserService } from 'src/user/user.service';
 import { LoginDto } from './dto';
 import { EncryptionService } from 'src/encryption/encryption.service';
 
 @Controller('login')
-export class AuthorizationController {
+export class AuthenticationController {
   constructor(
-    private readonly authorizationService: AuthorizationService,
+    private readonly authenticationService: AuthenticationService,
     private readonly userService: UserService,
     private readonly encryptionService: EncryptionService,
   ) {}
@@ -38,6 +38,6 @@ export class AuthorizationController {
         HttpStatus.BAD_REQUEST,
       );
     }
-    return await this.authorizationService.login(email);
+    return await this.authenticationService.login(email);
   }
 }

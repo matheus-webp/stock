@@ -11,7 +11,9 @@ export class ProductService {
   }
 
   async create(data: Prisma.ProductCreateInput) {
-    return await this.prisma.product.create({ data });
+    return await this.prisma.product.create({
+      data,
+    });
   }
 
   async delete(where: Prisma.ProductWhereUniqueInput) {

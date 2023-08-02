@@ -3,11 +3,11 @@ import * as jwt from 'jsonwebtoken';
 
 @Injectable()
 export class JwtService {
-  sign(payload: string) {
-    return jwt.sign(payload, process.env.JWT_SECRET);
+  sign(payload: object) {
+    return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1d' });
   }
 
   verify(token: string) {
-    jwt.verify(token, process.env.JWT_SECRET);
+    return jwt.verify(token, process.env.JWT_SECRET);
   }
 }
