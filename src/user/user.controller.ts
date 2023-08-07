@@ -3,9 +3,7 @@ import {
   Controller,
   HttpException,
   HttpStatus,
-  Param,
   Post,
-  Query,
   Request,
 } from '@nestjs/common';
 import { UserService } from './user.service';
