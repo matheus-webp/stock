@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Patch,
   Post,
   Put,
   Query,
@@ -12,6 +13,7 @@ import { CreateProductDto } from './dto/create';
 import { AuthorizationGuard } from 'src/authorization/authorization.guard';
 import { NotFoundError, UnauthorizedError } from 'src/errors';
 import { UpdateProductDto } from './dto/update';
+import { ChangeProductQuantity } from './dto/change-quantity';
 
 @Controller('product')
 export class ProductController {
@@ -49,5 +51,23 @@ export class ProductController {
     if (!product) new NotFoundError('product');
     if (user.id !== product.userId) new UnauthorizedError();
     return await this.productService.update({ id: product.id }, { ...data });
+  }
+
+  @UseGuards(AuthorizationGuard)
+  @Patch()
+  async change(
+    @Query('productId') productId: string,
+    @Req() req,
+    @Body() data: ChangeProductQuantity,
+  ) {
+    const { user } = req;
+    const { quantity } = data;
+    const product = await this.productService.findOne({ id: productId });
+    if (!product) new NotFoundError('product');
+    if (user.id !== product.userId) new UnauthorizedError();
+    return await this.productService.update(
+      { id: product.id },
+      { quantity: { set: quantity } },
+    );
   }
 }
