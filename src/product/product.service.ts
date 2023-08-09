@@ -10,6 +10,10 @@ export class ProductService {
     return await this.prisma.product.findUnique({ where });
   }
 
+  async listAll(where: Prisma.ProductWhereInput) {
+    return await this.prisma.product.findMany({ where });
+  }
+
   async create(data: Prisma.ProductCreateInput) {
     return await this.prisma.product.create({
       data,

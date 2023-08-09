@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   Patch,
   Post,
   Put,
@@ -18,6 +19,13 @@ import { ChangeProductQuantity } from './dto/change-quantity';
 @Controller('product')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
+
+  @UseGuards(AuthorizationGuard)
+  @Get()
+  async list(@Req() req) {
+    const { user } = req;
+    return await this.productService.listAll({ userId: user.id });
+  }
 
   @UseGuards(AuthorizationGuard)
   @Post()
