@@ -22,15 +22,15 @@ export class ProductController {
 
   @UseGuards(AuthorizationGuard)
   @Get()
-  async list(@Req() req) {
-    const { user } = req;
-    return await this.productService.listAll({ userId: user.id });
+  async list(@Req() { user }) {
+    const allProducts = await this.productService.listAll({ userId: user.id });
+    const totalValue = this.productService.sumAllPrices(allProducts);
+    return { allProducts, totalValue };
   }
 
   @UseGuards(AuthorizationGuard)
   @Post()
-  async create(@Req() req, @Body() data: CreateProductDto) {
-    const { user } = req;
+  async create(@Req() { user }, @Body() data: CreateProductDto) {
     return await this.productService.create({
       ...data,
       user: { connect: { id: user.id } },
@@ -39,8 +39,7 @@ export class ProductController {
 
   @UseGuards(AuthorizationGuard)
   @Post('delete')
-  async delete(@Query('productId') productId: string, @Req() req) {
-    const { user } = req;
+  async delete(@Query('productId') productId: string, @Req() { user }) {
     const product = await this.productService.findOne({ id: productId });
     if (!product) new NotFoundError('product');
     if (user.id !== product.userId) new UnauthorizedError();
@@ -51,10 +50,9 @@ export class ProductController {
   @Put('update')
   async update(
     @Query('productId') productId: string,
-    @Req() req,
+    @Req() { user },
     @Body() data: UpdateProductDto,
   ) {
-    const { user } = req;
     const product = await this.productService.findOne({ id: productId });
     if (!product) new NotFoundError('product');
     if (user.id !== product.userId) new UnauthorizedError();
@@ -65,11 +63,9 @@ export class ProductController {
   @Patch()
   async change(
     @Query('productId') productId: string,
-    @Req() req,
-    @Body() data: ChangeProductQuantity,
+    @Req() { user },
+    @Body() { quantity }: ChangeProductQuantity,
   ) {
-    const { user } = req;
-    const { quantity } = data;
     const product = await this.productService.findOne({ id: productId });
     if (!product) new NotFoundError('product');
     if (user.id !== product.userId) new UnauthorizedError();

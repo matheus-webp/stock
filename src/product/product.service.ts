@@ -30,4 +30,15 @@ export class ProductService {
   ) {
     return await this.prisma.product.update({ where, data });
   }
+
+  async deleteMany(where: Prisma.ProductWhereInput) {
+    return await this.prisma.product.deleteMany({ where });
+  }
+
+  sumAllPrices(arr: { price: number }[]): number {
+    return arr.reduce(
+      (accumulator, currentValue) => accumulator + currentValue.price,
+      0,
+    );
+  }
 }
