@@ -9,6 +9,7 @@ import { AuthenticationService } from './authentication.service';
 import { UserService } from 'src/user/user.service';
 import { LoginDto } from './dto';
 import { EncryptionService } from 'src/encryption/encryption.service';
+import { UnauthorizedError } from 'src/errors';
 
 @Controller('login')
 export class AuthenticationController {
@@ -22,22 +23,14 @@ export class AuthenticationController {
   async login(@Body() loginDto: LoginDto) {
     const { email, password } = loginDto;
     const user = await this.userService.findOne({ email });
-    if (!user) {
-      throw new HttpException(
-        'Email ou Senha incorretos ou inválidos',
-        HttpStatus.BAD_REQUEST,
-      );
-    }
+    if (!user) new UnauthorizedError();
+
     const isPasswordValid = await this.encryptionService.compare(
       password,
       user.password,
     );
-    if (!isPasswordValid) {
-      throw new HttpException(
-        'Email ou Senha incorretos ou inválidos',
-        HttpStatus.BAD_REQUEST,
-      );
-    }
+    if (!isPasswordValid) new UnauthorizedError();
+
     return await this.authenticationService.login(email);
   }
 }

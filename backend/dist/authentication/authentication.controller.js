@@ -18,6 +18,7 @@ const authentication_service_1 = require("./authentication.service");
 const user_service_1 = require("../user/user.service");
 const dto_1 = require("./dto");
 const encryption_service_1 = require("../encryption/encryption.service");
+const errors_1 = require("../errors");
 let AuthenticationController = class AuthenticationController {
     constructor(authenticationService, userService, encryptionService) {
         this.authenticationService = authenticationService;
@@ -27,13 +28,11 @@ let AuthenticationController = class AuthenticationController {
     async login(loginDto) {
         const { email, password } = loginDto;
         const user = await this.userService.findOne({ email });
-        if (!user) {
-            throw new common_1.HttpException('Email ou Senha incorretos ou inválidos', common_1.HttpStatus.BAD_REQUEST);
-        }
+        if (!user)
+            new errors_1.UnauthorizedError();
         const isPasswordValid = await this.encryptionService.compare(password, user.password);
-        if (!isPasswordValid) {
-            throw new common_1.HttpException('Email ou Senha incorretos ou inválidos', common_1.HttpStatus.BAD_REQUEST);
-        }
+        if (!isPasswordValid)
+            new errors_1.UnauthorizedError();
         return await this.authenticationService.login(email);
     }
 };
