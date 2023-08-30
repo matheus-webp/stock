@@ -4,7 +4,7 @@ import "./style/unauthorized-error.css";
 function UnauthorizedError() {
   return (
     <div className="main">
-      <p>Email/Senha incorretos ou inválidos</p>{" "}
+      <p className="unauthorized-text">Email/Senha incorretos ou inválidos</p>
     </div>
   );
 }
