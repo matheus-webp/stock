@@ -24,13 +24,15 @@ __decorate([
     __metadata("design:type", String)
 ], SignUpDto.prototype, "email", void 0);
 __decorate([
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.MinLength)(6),
+    (0, class_validator_1.IsNotEmpty)({ message: 'Senha não pode ser vazia' }),
+    (0, class_validator_1.MinLength)(6, { message: 'Senha deve ter no mínimo 6 caracteres' }),
     __metadata("design:type", String)
 ], SignUpDto.prototype, "password", void 0);
 __decorate([
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.MinLength)(6),
+    (0, class_validator_1.IsNotEmpty)({ message: 'Confirmação de senha não pode ser vazia' }),
+    (0, class_validator_1.MinLength)(6, {
+        message: 'Confirmação de senha deve ter no mínimo 6 caracteres',
+    }),
     __metadata("design:type", String)
 ], SignUpDto.prototype, "passwordConfirmation", void 0);
 exports.SignUpDto = SignUpDto;

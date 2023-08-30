@@ -30,7 +30,6 @@ export class AuthenticationController {
       user.password,
     );
     if (!isPasswordValid) new UnauthorizedError();
-
     return await this.authenticationService.login(email);
   }
 }
