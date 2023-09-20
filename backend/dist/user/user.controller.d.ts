@@ -8,7 +8,7 @@ export declare class UserController {
     private readonly encryptionSerivce;
     private readonly productService;
     constructor(userService: UserService, encryptionSerivce: EncryptionService, productService: ProductService);
-    signup({ name, email, password, passwordConfirmation }: SignUpDto): Promise<HttpException | import("./types").UserOmittedPassword>;
+    signup({ name, email, password, passwordConfirmation }: SignUpDto): Promise<import("./types").UserOmittedPassword | HttpException>;
     update({ user }: {
         user: any;
     }, updateUserDto: UpdateUserDto): Promise<void>;

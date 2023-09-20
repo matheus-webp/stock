@@ -9,13 +9,11 @@ export class SignUpDto {
   @IsEmail()
   email: string;
 
-  @IsNotEmpty({ message: 'Senha não pode ser vazia' })
-  @MinLength(6, { message: 'Senha deve ter no mínimo 6 caracteres' })
+  @IsNotEmpty()
+  @MinLength(8)
   password: string;
 
-  @IsNotEmpty({ message: 'Confirmação de senha não pode ser vazia' })
-  @MinLength(6, {
-    message: 'Confirmação de senha deve ter no mínimo 6 caracteres',
-  })
+  @IsNotEmpty()
+  @MinLength(8)
   passwordConfirmation: string;
 }
