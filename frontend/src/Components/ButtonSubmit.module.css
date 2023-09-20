@@ -1,0 +1,14 @@
+.buttonSubmit {
+  background-color: #189EA7;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 14px;
+  height: 42px;
+  margin-top: 24px;
+  width: 293px;
+}
+
+.buttonSubmit:hover {
+  cursor: pointer;
+}

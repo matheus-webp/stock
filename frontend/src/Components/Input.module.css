@@ -1,0 +1,18 @@
+.input {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputName {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.inputField {
+  height: 42px;
+  width: 293px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  border: none;
+}

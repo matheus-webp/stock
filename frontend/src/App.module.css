@@ -1,0 +1,38 @@
+.login {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', sans-serif;
+  margin-top: 10%;
+}
+
+.loginTitulo {
+  font-size: 32px;
+  margin-bottom: 42px;
+}
+
+.createAccount {
+  font-size: 14px;
+  color: #000;
+  opacity: 50%;
+}
+
+.createAccountLink {
+  text-decoration: none;
+  color: #189EA7;
+}
+
+.divider {
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  opacity: 50%;
+  width: 293px;
+  text-align: center;
+  padding: 0;
+}
+
+.dividerText {
+  font-size: 12px;
+  padding: 0 10px 0 10px;
+}
