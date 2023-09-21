@@ -16,6 +16,10 @@ import { NotFoundError, UnauthorizedError } from 'src/errors';
 import { UpdateProductDto } from './dto/update';
 import { ChangeProductQuantity } from './dto/change-quantity';
 
+type categoryDTO = {
+  categoryId: string;
+};
+
 @Controller('product')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
@@ -26,6 +30,18 @@ export class ProductController {
     const allProducts = await this.productService.listAll({ userId: user.id });
     const totalValue = this.productService.sumAllPrices(allProducts);
     return { allProducts, totalValue };
+  }
+
+  @UseGuards(AuthorizationGuard)
+  @Get('listAll')
+  async listAllByCategory(
+    @Req() { user },
+    @Query() { categoryId }: categoryDTO,
+  ) {
+    return await this.productService.listAll({
+      userId: user.id,
+      AND: { categoryId },
+    });
   }
 
   @UseGuards(AuthorizationGuard)
