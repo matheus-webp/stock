@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Delete,
+  Get,
   HttpException,
   HttpStatus,
   Post,
@@ -15,6 +16,11 @@ import { CategoryUniqueIdDto } from './dto/categoryId.dto';
 @Controller('category')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
+
+  @Get()
+  async listAll() {
+    return await this.categoryService.findAll();
+  }
 
   @Post()
   async newCategory(@Body() { name, description }: CategoryDto) {

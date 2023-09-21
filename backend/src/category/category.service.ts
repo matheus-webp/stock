@@ -14,6 +14,10 @@ export class CategoryService {
     return await this.prisma.category.findUnique({ where });
   }
 
+  async findAll() {
+    return await this.prisma.category.findMany();
+  }
+
   async delete(where: Prisma.CategoryWhereUniqueInput) {
     return await this.prisma.category.delete({ where });
   }
