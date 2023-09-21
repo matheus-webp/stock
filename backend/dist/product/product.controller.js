@@ -40,6 +40,12 @@ let ProductController = class ProductController {
         const totalValue = this.productService.sumAllPrices(allProducts);
         return { allProducts, totalValue };
     }
+    async listAllByCategory({ user }, { categoryId }) {
+        return await this.productService.listAll({
+            userId: user.id,
+            AND: { categoryId },
+        });
+    }
     async create({ user }, data) {
         const { categoryId } = data, productData = __rest(data, ["categoryId"]);
         return await this.productService.create(Object.assign(Object.assign({}, productData), { user: { connect: { id: user.id } }, category: { connect: { id: categoryId } } }));
@@ -77,6 +83,15 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], ProductController.prototype, "list", null);
+__decorate([
+    (0, common_1.UseGuards)(authorization_guard_1.AuthorizationGuard),
+    (0, common_1.Get)('listAll'),
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Query)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], ProductController.prototype, "listAllByCategory", null);
 __decorate([
     (0, common_1.UseGuards)(authorization_guard_1.AuthorizationGuard),
     (0, common_1.Post)(),

@@ -2,6 +2,9 @@ import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create';
 import { UpdateProductDto } from './dto/update';
 import { ChangeProductQuantity } from './dto/change-quantity';
+type categoryDTO = {
+    categoryId: string;
+};
 export declare class ProductController {
     private readonly productService;
     constructor(productService: ProductService);
@@ -19,6 +22,17 @@ export declare class ProductController {
         }, unknown, never> & {})[];
         totalValue: number;
     }>;
+    listAllByCategory({ user }: {
+        user: any;
+    }, { categoryId }: categoryDTO): Promise<(import("@prisma/client/runtime/library").GetResult<{
+        id: string;
+        name: string;
+        description: string;
+        price: number;
+        quantity: number;
+        userId: string;
+        categoryId: string;
+    }, unknown, never> & {})[]>;
     create({ user }: {
         user: any;
     }, data: CreateProductDto): Promise<import("@prisma/client/runtime/library").GetResult<{
@@ -64,3 +78,4 @@ export declare class ProductController {
         categoryId: string;
     }, unknown, never> & {}>;
 }
+export {};
