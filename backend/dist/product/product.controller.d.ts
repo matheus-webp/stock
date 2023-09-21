@@ -15,6 +15,7 @@ export declare class ProductController {
             price: number;
             quantity: number;
             userId: string;
+            categoryId: string;
         }, unknown, never> & {})[];
         totalValue: number;
     }>;
@@ -27,6 +28,7 @@ export declare class ProductController {
         price: number;
         quantity: number;
         userId: string;
+        categoryId: string;
     }, unknown, never> & {}>;
     delete(productId: string, { user }: {
         user: any;
@@ -37,6 +39,7 @@ export declare class ProductController {
         price: number;
         quantity: number;
         userId: string;
+        categoryId: string;
     }, unknown, never> & {}>;
     update(productId: string, { user }: {
         user: any;
@@ -47,6 +50,7 @@ export declare class ProductController {
         price: number;
         quantity: number;
         userId: string;
+        categoryId: string;
     }, unknown, never> & {}>;
     change(productId: string, { user }: {
         user: any;
@@ -57,5 +61,6 @@ export declare class ProductController {
         price: number;
         quantity: number;
         userId: string;
+        categoryId: string;
     }, unknown, never> & {}>;
 }

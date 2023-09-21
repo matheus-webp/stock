@@ -31,9 +31,11 @@ export class ProductController {
   @UseGuards(AuthorizationGuard)
   @Post()
   async create(@Req() { user }, @Body() data: CreateProductDto) {
+    const { categoryId, ...productData } = data;
     return await this.productService.create({
-      ...data,
+      ...productData,
       user: { connect: { id: user.id } },
+      category: { connect: { id: categoryId } },
     });
   }
 

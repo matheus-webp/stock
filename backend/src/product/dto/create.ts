@@ -12,4 +12,7 @@ export class CreateProductDto {
   @IsNotEmpty()
   @IsNumber()
   quantity: number;
+
+  @IsNotEmpty()
+  categoryId: string;
 }

@@ -12,11 +12,12 @@ const user_module_1 = require("./user/user.module");
 const product_module_1 = require("./product/product.module");
 const authentication_module_1 = require("./authentication/authentication.module");
 const authorization_module_1 = require("./authorization/authorization.module");
+const category_module_1 = require("./category/category.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [user_module_1.UserModule, product_module_1.ProductModule, authentication_module_1.AuthenticationModule, authorization_module_1.AuthorizationModule],
+        imports: [user_module_1.UserModule, product_module_1.ProductModule, authentication_module_1.AuthenticationModule, authorization_module_1.AuthorizationModule, category_module_1.CategoryModule],
         controllers: [],
         providers: [],
     })

@@ -28,5 +28,9 @@ __decorate([
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], CreateProductDto.prototype, "quantity", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], CreateProductDto.prototype, "categoryId", void 0);
 exports.CreateProductDto = CreateProductDto;
 //# sourceMappingURL=create.js.map
