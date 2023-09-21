@@ -1,6 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
 
-export class DeleteCategoryDto {
+export class CategoryUniqueIdDto {
   @IsNotEmpty()
   categoryId: string;
 }

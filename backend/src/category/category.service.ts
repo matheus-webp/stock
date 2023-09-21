@@ -17,4 +17,11 @@ export class CategoryService {
   async delete(where: Prisma.CategoryWhereUniqueInput) {
     return await this.prisma.category.delete({ where });
   }
+
+  async change(
+    where: Prisma.CategoryWhereUniqueInput,
+    data: Prisma.CategoryUpdateInput,
+  ) {
+    return await this.prisma.category.update({ where, data });
+  }
 }

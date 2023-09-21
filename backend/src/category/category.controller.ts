@@ -5,17 +5,19 @@ import {
   HttpException,
   HttpStatus,
   Post,
+  Put,
+  Query,
 } from '@nestjs/common';
 import { CategoryService } from './category.service';
-import { NewCategoryDto } from './dto';
-import { DeleteCategoryDto } from './dto/delete-category.dto';
+import { CategoryDto } from './dto';
+import { CategoryUniqueIdDto } from './dto/categoryId.dto';
 
 @Controller('category')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
   @Post()
-  async newCategory(@Body() { name, description }: NewCategoryDto) {
+  async newCategory(@Body() { name, description }: CategoryDto) {
     const categoryAlreadyExists = await this.categoryService.findOne({ name });
     if (categoryAlreadyExists) {
       throw new HttpException(
@@ -27,7 +29,18 @@ export class CategoryController {
   }
 
   @Delete()
-  async deleteCategory(@Body() { categoryId }: DeleteCategoryDto) {
+  async deleteCategory(@Body() { categoryId }: CategoryUniqueIdDto) {
     return await this.categoryService.delete({ id: categoryId });
+  }
+
+  @Put()
+  async updateCategory(
+    @Body() { name, description }: CategoryDto,
+    @Query() { categoryId }: CategoryUniqueIdDto,
+  ) {
+    return await this.categoryService.change(
+      { id: categoryId },
+      { name, description },
+    );
   }
 }
